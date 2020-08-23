@@ -62,12 +62,24 @@ class Graph:
                 visited_verticies.add(current_vertex)
                 for neighbor in self.get_neighbors(current_vertex):
                     vertices_stack.push(neighbor)
-    def dft_recursive(self, starting_vertex):
+    
+    def dft_recursive(self, start_vert, visited=None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
+        # keeping track of a visited set of vertices is the "trickiest part"
+        # one good solution is to create a optional variable for a visited set you can keep passing around
+        if visited is None:
+            visited = set()
+        visited.add(start_vert)
+        print(start_vert)
+        # for each neighbor, recurse this function with an updated visited set
+        for child_vert in self.vertices[start_vert]:
+            if child_vert not in visited:
+                self.dft_recursive(child_vert, visited)
+
         pass  # TODO
     def bfs(self, starting_vertex, destination_vertex):
         """
